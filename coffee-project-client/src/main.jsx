@@ -9,6 +9,8 @@ import MainLayout from './Layouts/MainLayout.jsx';
 import ErrorPage from './Components/ErrorPage/ErrorPage.jsx';
 import Home from './Components/Home/Home.jsx';
 import AuthProvider from './Providers/AuthProvider';
+import AddCoffee from './Components/CRUD/AddCoffee';
+import UpdateCoffee from './Components/CRUD/UpdateCoffee';
 
 
 const router = createBrowserRouter([
@@ -21,6 +23,14 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home/>,
       },
+      {
+        path: "/addCoffee",
+        element: <AddCoffee/>
+      },
+      {
+        path: "/updateCoffee",
+        element: <UpdateCoffee/>
+      }
     ],
   },
 ]);
