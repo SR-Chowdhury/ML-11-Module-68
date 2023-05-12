@@ -11,6 +11,7 @@ import Home from './Components/Home/Home.jsx';
 import AuthProvider from './Providers/AuthProvider';
 import AddCoffee from './Components/CRUD/AddCoffee';
 import UpdateCoffee from './Components/CRUD/UpdateCoffee';
+import SingleView from './Components/CRUD/SingleView';
 
 
 const router = createBrowserRouter([
@@ -22,14 +23,21 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home/>,
+        loader: () => fetch("http://localhost:5000/coffee")
       },
       {
         path: "/addCoffee",
         element: <AddCoffee/>
       },
       {
-        path: "/updateCoffee",
-        element: <UpdateCoffee/>
+        path: '/coffee/:id',
+        element: <SingleView/>,
+        loader: ({params}) => fetch(`http://localhost:5000/coffee/${params.id}`)
+      },
+      {
+        path: "/updateCoffee/:id",
+        element: <UpdateCoffee/>,
+        loader: ({params}) => fetch(`http://localhost:5000/coffee/${params.id}`)
       }
     ],
   },

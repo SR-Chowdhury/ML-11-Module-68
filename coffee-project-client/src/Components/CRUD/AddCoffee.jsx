@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const AddCoffee = () => {
@@ -43,6 +44,9 @@ const AddCoffee = () => {
         <div className='container mx-auto'>
             <h1 className='text-center text-xl'>Add a Coffee</h1><br />
             <hr />
+            <div>
+                <Link to={'/'} className='text-primary'>Back to Home</Link>
+            </div>
             <div className=''>
                 <form onSubmit={handleSubmit}>
                     <div className="space-y-12">
