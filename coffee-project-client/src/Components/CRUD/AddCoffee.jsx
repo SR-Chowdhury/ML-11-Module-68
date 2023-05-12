@@ -1,22 +1,38 @@
 import React from 'react';
+import Swal from 'sweetalert2';
 
 const AddCoffee = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const form = event.target; 
+        const form = event.target;
         const coffeeName = form.coffeeName.value;
         const availableQuantity = form.availableQuantity.value;
         const supplier = form.supplier.value;
         const taste = form.taste.value;
         const photo = form.photo.value;
-        const formData = {coffeeName, availableQuantity, supplier, taste, photo};
+        const formData = { coffeeName, availableQuantity, supplier, taste, photo };
         console.log(formData);
 
-        fetch('')
-            .then(res =>res.json())
+        fetch('http://localhost:5000/coffee', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(formData),
+        })
+            .then(res => res.json())
             .then(data => {
                 console.log(data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Successfully Added!',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                    })
+                    form.reset();
+                }
             })
             .catch()
     }
@@ -37,35 +53,35 @@ const AddCoffee = () => {
                                 <div className="sm:col-span-3">
                                     <label className="block text-sm font-medium leading-6 text-gray-900">Coffe Name</label>
                                     <div className="mt-2">
-                                        <input type="text" name="coffeeName" id="coffee-name" className="block w-full rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1"/>
+                                        <input type="text" name="coffeeName" id="coffee-name" className="block w-full rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1" />
                                     </div>
                                 </div>
                                 <div className="sm:col-span-3">
                                     <label className="block text-sm font-medium leading-6 text-gray-900">Available Quantity</label>
                                     <div className="mt-2">
-                                        <input type="text" name="availableQuantity" id="first-name" className="block w-full rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1"/>
+                                        <input type="text" name="availableQuantity" id="first-name" className="block w-full rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1" />
                                     </div>
                                 </div>
                                 <div className="sm:col-span-3">
                                     <label className="block text-sm font-medium leading-6 text-gray-900">Supplied</label>
                                     <div className="mt-2">
-                                        <input type="text" name="supplier" id="supplier" className="block w-full rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1"/>
+                                        <input type="text" name="supplier" id="supplier" className="block w-full rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1" />
                                     </div>
                                 </div>
                                 <div className="sm:col-span-3">
                                     <label className="block text-sm font-medium leading-6 text-gray-900">Taste</label>
                                     <div className="mt-2">
-                                        <input type="text" name="taste" id="taste" className="block w-full rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1"/>
+                                        <input type="text" name="taste" id="taste" className="block w-full rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1" />
                                     </div>
                                 </div>
                                 <div className="col-span-full">
                                     <label className="block text-sm font-medium leading-6 text-gray-900">Photo URL</label>
                                     <div className="mt-2">
-                                    <input type="text" name="photo" id="photo" className="block w-full rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1"/>
+                                        <input type="text" name="photo" id="photo" className="block w-full rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1" />
                                     </div>
                                 </div>
 
-                                
+
                             </div>
                         </div>
                     </div>
